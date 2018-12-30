@@ -15,7 +15,11 @@ foreign import leafletMap :: forall props. ReactComponent { | props }
 foreign import leafletTileLayer :: forall props. ReactComponent { | props }
 
 type Props =
-  { geoJson :: Maybe GeoJSON }
+  { centerLatitude :: Number
+  , centerLongitude :: Number
+  , geoJson :: Maybe GeoJSON
+  , zoom :: Int
+  }
 
 type State =
   {}
@@ -50,8 +54,8 @@ render self =
       , children:
         [ element
             leafletMap
-            { center: [35.0, 135.0]
-            , zoom: 10.0
+            { center: [self.props.centerLatitude, self.props.centerLongitude]
+            , zoom: self.props.zoom
             , children:
               [ element
                   leafletTileLayer

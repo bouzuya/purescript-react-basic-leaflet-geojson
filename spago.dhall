@@ -6,6 +6,7 @@ You can edit this file as you like.
     "purescript-react-basic-leaflet-geojson"
 , dependencies =
     [ "bouzuya-geojson"
+    , "numbers"
     , "prelude"
     , "psci-support"
     , "react-basic"
