@@ -2,6 +2,7 @@ module Component.App
   ( app
   ) where
 
+import Component.LeafletMap as LeafletMap
 import React.Basic (Component, JSX, Self, StateUpdate(..), createComponent, make)
 import React.Basic.DOM as H
 
@@ -37,7 +38,12 @@ render self =
         ]
       }
     , H.div
-      { className: "body" }
+      { className: "body"
+      , children:
+        [ H.textarea { readOnly: true, value: "{}" } -- TODO
+        , LeafletMap.map { geojson: "{}" } -- TODO
+        ]
+      }
     , H.div
       { className: "footer" }
     ]
