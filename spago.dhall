@@ -5,10 +5,11 @@ You can edit this file as you like.
 { name =
     "purescript-react-basic-leaflet-geojson"
 , dependencies =
-    [ "prelude"
+    [ "bouzuya-geojson"
+    , "prelude"
     , "psci-support"
-    , "bouzuya-geojson"
     , "react-basic"
+    , "simple-json"
     , "test-unit"
     ]
 , packages =
