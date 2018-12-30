@@ -116,6 +116,6 @@ let upstream =
 
 let overrides = {=}
 
-let additions = {=}
+let additions = {=} // ./bouzuya.dhall
 
 in  upstream ⫽ overrides ⫽ additions

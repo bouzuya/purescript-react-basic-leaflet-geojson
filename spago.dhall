@@ -7,6 +7,7 @@ You can edit this file as you like.
 , dependencies =
     [ "prelude"
     , "psci-support"
+    , "bouzuya-geojson"
     , "react-basic"
     , "test-unit"
     ]
