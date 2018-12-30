@@ -1,7 +1,7 @@
 {
   "name": "purescript-react-basic-leaflet-geojson",
   "description": "[mockmock.dev #196](https://mockmock.connpass.com/event/113906/) application.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": {
     "url": "https://bouzuya.net/",
     "name": "bouzuya",
