@@ -3,6 +3,12 @@
 var react = require('react');
 var leaflet = require('react-leaflet');
 
+exports.getCenter = function (leafletElement) {
+  return function () {
+    return leafletElement.getCenter();
+  };
+};
+
 exports.getZoom = function (leafletElement) {
   return function () {
     return leafletElement.getZoom();

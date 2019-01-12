@@ -7,12 +7,13 @@ import Prelude
 import Bouzuya.Data.GeoJSON (GeoJSON)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
-import React.Basic (Component, JSX, ReactComponent, Self, StateUpdate(..), createComponent, element, make, send)
+import React.Basic (Component, JSX, ReactComponent, Self, StateUpdate(..), createComponent, element, make)
 import React.Basic.DOM as H
 import Simple.JSON as SimpleJSON
 
 data LeafletElement
 
+foreign import getCenter :: LeafletElement -> Effect { lat :: Number, lng :: Number }
 foreign import getZoom :: LeafletElement -> Effect Number
 foreign import leafletGeoJSON :: forall props. ReactComponent { | props }
 foreign import leafletMap :: forall props. ReactComponent { | props }
@@ -23,6 +24,7 @@ type Props =
   { centerLatitude :: Number
   , centerLongitude :: Number
   , geoJson :: Maybe GeoJSON
+  , onCenterChanged :: { lat :: Number, lng :: Number } -> Effect Unit
   , onZoomChanged :: Number -> Effect Unit
   , zoom :: Number
   }
@@ -74,6 +76,10 @@ render self =
                 Just geoJson ->
                   [ element leafletGeoJSON { data: SimpleJSON.write geoJson }
                   ]
+            , onMove:
+                \leafletElement -> do
+                  center <- getCenter leafletElement
+                  self.props.onCenterChanged center
             , onZoom:
                 \leafletElement -> do
                   zoom <- getZoom leafletElement

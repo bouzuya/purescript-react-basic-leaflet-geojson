@@ -6,9 +6,9 @@ import Prelude
 
 import Bouzuya.Data.GeoJSON (GeoJSON)
 import Component.LeafletMap as LeafletMap
-import Data.Int as Int
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Number as Number
+import Math as Math
 import React.Basic (Component, JSX, Self, StateUpdate(..), capture, createComponent, make, send)
 import React.Basic.DOM as H
 import React.Basic.DOM.Events (targetValue)
@@ -39,8 +39,8 @@ app = make component { initialState, render, update } {}
 
 initialState :: State
 initialState =
-  { lat: 35.0
-  , lng: 135.0
+  { lat: 35.000001
+  , lng: 135.000001
   , geoJson: Nothing
   , geoJsonText: ""
   , zoom: 10.0
@@ -67,7 +67,7 @@ render self =
                 self
                 targetValue
                 (\v -> EditLat (fromMaybe "" v))
-          , step: "0.1"
+          , step: "0.000001"
           , type: "number"
           , value: show self.state.lat
           }
@@ -77,7 +77,7 @@ render self =
                 self
                 targetValue
                 (\v -> EditLng (fromMaybe "" v))
-          , step: "0.1"
+          , step: "0.000001"
           , type: "number"
           , value: show self.state.lng
           }
@@ -118,6 +118,9 @@ render self =
           { centerLatitude: self.state.lat
           , centerLongitude: self.state.lng
           , geoJson: self.state.geoJson
+          , onCenterChanged: \center -> do
+              send self (EditLat (show center.lat))
+              send self (EditLng (show center.lng))
           , onZoomChanged: \zoom -> send self (EditZoom (show zoom))
           , zoom: self.state.zoom
           }
@@ -138,11 +141,11 @@ update self (EditJSON s) =
 update self (EditLat s) =
   case Number.fromString s of
     Nothing -> NoUpdate
-    Just n -> Update self.state { lat = n }
+    Just n -> Update self.state { lat = (Math.floor (n * 1000000.0)) / 1000000.0 }
 update self (EditLng s) =
   case Number.fromString s of
     Nothing -> NoUpdate
-    Just n -> Update self.state { lng = n }
+    Just n -> Update self.state { lng = (Math.floor (n * 1000000.0)) / 1000000.0 }
 update self (EditZoom s) =
   case Number.fromString s of
     Nothing -> NoUpdate
