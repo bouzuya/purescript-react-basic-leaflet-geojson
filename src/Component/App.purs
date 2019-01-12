@@ -100,7 +100,7 @@ render self =
           , value: self.state.geoJsonText
           }
         , H.span
-          { style: H.css { "white-space": "pre" }
+          { style: H.css { whiteSpace: "pre" }
           , children:
             [ H.text """
 {
