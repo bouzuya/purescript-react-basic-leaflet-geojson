@@ -9,7 +9,7 @@ import Component.LeafletMap as LeafletMap
 import Data.Int as Int
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Number as Number
-import React.Basic (Component, JSX, Self, StateUpdate(..), capture, createComponent, make)
+import React.Basic (Component, JSX, Self, StateUpdate(..), capture, createComponent, make, send)
 import React.Basic.DOM as H
 import React.Basic.DOM.Events (targetValue)
 import Simple.JSON as SimpleJSON
@@ -118,6 +118,7 @@ render self =
           { centerLatitude: self.state.lat
           , centerLongitude: self.state.lng
           , geoJson: self.state.geoJson
+          , onZoomChanged: \zoom -> send self (EditZoom (show zoom))
           , zoom: self.state.zoom
           }
         ]
