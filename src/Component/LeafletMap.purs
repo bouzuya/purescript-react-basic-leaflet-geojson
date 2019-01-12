@@ -18,7 +18,7 @@ type Props =
   { centerLatitude :: Number
   , centerLongitude :: Number
   , geoJson :: Maybe GeoJSON
-  , zoom :: Int
+  , zoom :: Number
   }
 
 type State =

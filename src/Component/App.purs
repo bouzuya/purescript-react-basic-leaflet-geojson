@@ -20,7 +20,7 @@ type Props =
 type State =
   { lat :: Number
   , lng :: Number
-  , zoom :: Int
+  , zoom :: Number
   , geoJson :: Maybe GeoJSON
   , geoJsonText :: String
   }
@@ -43,7 +43,7 @@ initialState =
   , lng: 135.0
   , geoJson: Nothing
   , geoJsonText: ""
-  , zoom: 10
+  , zoom: 10.0
   }
 
 render :: Self Props State Action -> JSX
@@ -143,6 +143,6 @@ update self (EditLng s) =
     Nothing -> NoUpdate
     Just n -> Update self.state { lng = n }
 update self (EditZoom s) =
-  case Int.fromString s of
+  case Number.fromString s of
     Nothing -> NoUpdate
     Just n -> Update self.state { zoom = n }
